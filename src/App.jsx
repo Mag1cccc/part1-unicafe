@@ -10,16 +10,32 @@ function App() {
     return <button onClick={handleClick}> {text} </button>;
   };
 
+  const StatisticLine = ({ name, value }) => {
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <th>{name}</th>
+            <td>{value}</td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  };
+
   const Statistics = () => {
     return (
       <>
         <h1> statistics </h1>
-        <p> good {good} </p>
-        <p> neutral {neutral} </p>
-        <p> bad {bad} </p>
-        <p> all {total} </p>
-        <p> average {average} </p>
-        <p> positive feedback {positivePercentage}% </p>
+        <StatisticLine name="good" value={good} />
+        <StatisticLine name="neutral" value={neutral} />
+        <StatisticLine name="bad" value={bad} />
+        <StatisticLine name="all" value={total} />
+        <StatisticLine name="average" value={average} />
+        <StatisticLine
+          name=" positive feedback"
+          value={positivePercentage + "%"}
+        />
       </>
     );
   };
@@ -47,10 +63,14 @@ function App() {
       <Button handleClick={goodFeed} text="good" />
       <Button handleClick={neutralFeed} text="neutral" />
       <Button handleClick={badFeed} text="bad" />
-      {feedback ? <Statistics /> : <>
-        <h1> statistics </h1>
-        <p> No feedback given </p>
-      </>}
+      {feedback ? (
+        <Statistics />
+      ) : (
+        <>
+          <h1> statistics </h1>
+          <p> No feedback given </p>
+        </>
+      )}
     </div>
   );
 }
